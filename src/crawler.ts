@@ -9,15 +9,15 @@ class Crawler {
   }
 
   crawl(channel: string, from: number, to: number): MessageThread[] {
-    const history = this.slackClient.fetchConversationsHistory(channel, from, to);
-    if (!Array.isArray(history.messages)) {
-      return [];
+    const hasMore = true;
+    const messages: Array = [];
+    while (hasMore) {
+      const history = this.slackClient.fetchConversationsHistory(channel, from, to);
+      Array.prototype.push.apply(messages, history.messages)
+      hasMore = history.hasOwnProperty('has_more') && history.has_more
     }
-    return history.messages.flatMap((m) => {
-      if (m.type !== 'message') {
-        return [];
-      }
-      if (m.hasOwnProperty('subtype')) {
+    return messages.flatMap((m) => {
+      if (m.type !== 'message' || m.hasOwnProperty('subtype')) {
         return [];
       }
       const thread = new MessageThread(m.ts)
