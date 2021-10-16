@@ -4,13 +4,16 @@ class SlackClient {
     this.token = token;
   }
 
-  fetchConversationsHistory(channel: string, oldest: number = null, latest: number = null): any {
-    const params = { 'channel': channel };
+  fetchConversationsHistory(channel: string, oldest: number = null, latest: number = null, cursor: string = null): any {
+    const params = { 'channel': channel, 'limit': 200 };
     if (oldest) {
       params.oldest = oldest;
     }
     if (latest) {
       params.latest = latest;
+    }
+    if (cursor) {
+      params.cursor = cursor;
     }
     const res = this.request('conversations.history', params);
     return res;
@@ -28,8 +31,8 @@ class SlackClient {
   }
 
   request(apiName: string, params: any, options: any = {}): any {
-    options.headers = { 'Authorization': `Bearer ${this.token}` }
-    const url = this.buildURL(apiName, params)
+    options.headers = { 'Authorization': `Bearer ${this.token}` };
+    const url = this.buildURL(apiName, params);
     const res = UrlFetchApp.fetch(url, options);
     if (res.getResponseCode() !== 200) {
       throw new Error(res.getContentText());
@@ -48,4 +51,3 @@ class SlackClient {
     return url;
   }
 }
-
