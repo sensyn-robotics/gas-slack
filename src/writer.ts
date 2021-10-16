@@ -4,8 +4,8 @@ class Writer {
   currentRow: number;
 
   constructor(sheet: GoogleAppsScript.Spreadsheet.Sheet): void {
-    this.sheet = sheet
-    this.currentRow = 1
+    this.sheet = sheet;
+    this.currentRow = 1;
   }
 
   write(threads: MessageThread[]): void {
@@ -16,6 +16,6 @@ class Writer {
         this.sheet.getRange(this.currentRow + 1, 1, messages.length - 1, 3).shiftRowGroupDepth(1);
       }
       this.currentRow += messages.length;
-    })
+    });
   }
 }

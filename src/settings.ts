@@ -25,7 +25,7 @@ class Settings {
   }
 
   getSheetName() {
-    const format = (dt) => { return dt.getFullYear() + '/' + (dt.getMonth() + 1) + '/' + dt.getDate() };
+    const format = (dt) => { return dt.getFullYear() + '/' + (dt.getMonth() + 1) + '/' + dt.getDate(); };
     return format(this.fromDate) + '-' + format(this.orignalToDate);
   }
 

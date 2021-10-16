@@ -26,7 +26,7 @@ class UserConverter {
 
   constructor(slackClient: SlackClient): void {
     this.userCache = {};
-    this.slackClient = slackClient
+    this.slackClient = slackClient;
   }
 
   convert(userId): string {
