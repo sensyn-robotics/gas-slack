@@ -13,7 +13,7 @@ class Crawler {
     let cursor: string = null;
     const messages: Array = [];
     while (hasMore) {
-      const history = this.slackClient.fetchConversationsHistory(channel, from, to, cursor);
+      const history = this.slackClient.fetchConversationsHistory(channel, from, to, 200, cursor);
       Array.prototype.push.apply(messages, history.messages);
       if(history.hasOwnProperty('response_metadata') && history.response_metadata.hasOwnProperty('next_cursor')) {
         cursor = history.response_metadata.next_cursor;

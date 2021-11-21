@@ -4,8 +4,17 @@ class SlackClient {
     this.token = token;
   }
 
-  fetchConversationsHistory(channel: string, oldest: number = null, latest: number = null, cursor: string = null): any {
-    const params = { 'channel': channel, 'limit': 200 };
+  fetchConversationsList(cursor: string = null, limit = 200): any {
+    const params = { 'exclude_archived': true, 'limit': limit };
+    if (cursor) {
+      params.cursor = cursor;
+    }
+    const res = this.request('conversations.list', params);
+    return res;
+  }
+
+  fetchConversationsHistory(channel: string, oldest: number = null, latest: number = null, limit = 200,, cursor: string = null): any {
+    const params = { 'channel': channel, 'limit': limit };
     if (oldest) {
       params.oldest = oldest;
     }
@@ -31,13 +40,19 @@ class SlackClient {
   }
 
   request(apiName: string, params: any, options: any = {}): any {
-    options.headers = { 'Authorization': `Bearer ${this.token}` };
-    const url = this.buildURL(apiName, params);
-    const res = UrlFetchApp.fetch(url, options);
-    if (res.getResponseCode() !== 200) {
-      throw new Error(res.getContentText());
+    options.headers = { 'Authorization': `Bearer ${this.token}` }
+    const url = this.buildURL(apiName, params)
+    for(;;) {
+      const res = UrlFetchApp.fetch(url, options);
+      if (res.getResponseCode() == 429) {
+        Utilities.sleep(10000);
+        continue
+      }
+      if (res.getResponseCode() !== 200) {
+        throw new Error(res.getContentText());
+      }
+      return JSON.parse(res.getContentText());
     }
-    return JSON.parse(res.getContentText());
   }
 
   buildURL(name: string, params: any): string {
