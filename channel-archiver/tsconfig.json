@@ -1,0 +1,15 @@
+{
+  "extends": "./../tsconfig-gas",
+  "compilerOptions": {
+    "outFile": "../dist/channel-archiver/index.js"
+  },
+  "include": [
+    "src/**.ts"
+  ],
+  "references": [
+    {
+      "path": "../common/slack",
+      "prepend": true
+    }
+  ]
+}
