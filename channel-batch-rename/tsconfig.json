@@ -1,0 +1,15 @@
+{
+  "extends": "./../tsconfig-gas",
+  "compilerOptions": {
+    "outFile": "../dist/channel-batch-rename/index.js"
+  },
+  "include": [
+    "src/**.ts"
+  ],
+  "references": [
+    {
+      "path": "../common/slack",
+      "prepend": true
+    }
+  ]
+}
