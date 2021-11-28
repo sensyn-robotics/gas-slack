@@ -4,7 +4,7 @@ class Converter {
   textConverter: TextConverter;
   datetimeConverter: DatetimeConverter;
 
-  constructor(slackClient: SlackClient): void {
+  constructor(slackClient: slack.APIClient) {
     this.userConverter = new UserConverter(slackClient);
     this.textConverter = new TextConverter(this.userConverter);
     this.datetimeConverter = new DatetimeConverter();
@@ -22,14 +22,14 @@ class Converter {
 
 class UserConverter {
   userCache: any;
-  slackClient: SlackClient;
+  slackClient: slack.APIClient;
 
-  constructor(slackClient: SlackClient): void {
+  constructor(slackClient: slack.APIClient) {
     this.userCache = {};
     this.slackClient = slackClient;
   }
 
-  convert(userId): string {
+  convert(userId: string): string {
     if (this.userCache.hasOwnProperty(userId)) {
       return this.userCache[userId];
     }
@@ -41,7 +41,7 @@ class UserConverter {
 class TextConverter {
   userConverter: UserConverter;
 
-  constructor(userConverter: UserConverter): void {
+  constructor(userConverter: UserConverter) {
     this.userConverter = userConverter;
   }
 

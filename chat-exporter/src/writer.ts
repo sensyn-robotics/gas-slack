@@ -3,7 +3,7 @@ class Writer {
   sheet: GoogleAppsScript.Spreadsheet.Sheet;
   currentRow: number;
 
-  constructor(sheet: GoogleAppsScript.Spreadsheet.Sheet): void {
+  constructor(sheet: GoogleAppsScript.Spreadsheet.Sheet) {
     this.sheet = sheet;
     this.currentRow = 1;
   }

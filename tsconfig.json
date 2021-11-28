@@ -1,0 +1,21 @@
+{
+  "files": [],
+  "include": [],
+  "references": [
+    {
+      "path": "./common/slack"
+    },
+    {
+      "path": "./channel-archiver"
+    },
+    {
+      "path": "./channel-batch-rename"
+    },
+    {
+      "path": "./channel-list"
+    },
+    {
+      "path": "./chat-exporter"
+    },
+  ]
+}

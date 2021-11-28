@@ -1,0 +1,24 @@
+{
+  "devDependencies": {
+    "@google/clasp": "^2.3.2",
+    "@types/google-apps-script": "^1.0.37",
+    "@typescript-eslint/eslint-plugin": "^4.33.0",
+    "@typescript-eslint/parser": "^4.33.0",
+    "typescript": "^4.4.3",
+    "copyfiles": "^2.4.1"
+  },
+  "scripts": {
+    "build": "tsc --build && npm run config-all",
+    "clean": "tsc --build --clean",
+    "config-all": "npm run config-channel-batch-rename && npm run config-chat-exporter && npm run config-channel-list && npm run config-channel-archiver",
+    "config-channel-batch-rename": "copyfiles -u 1 channel-batch-rename/appsscript.json dist/channel-batch-rename/",
+    "push-channel-batch-rename": "cd channel-batch-rename && clasp push",
+    "config-chat-exporter": "copyfiles -u 1 chat-exporter/appsscript.json dist/chat-exporter/",
+    "push-chat-exporter": "cd chat-exporter && clasp push",
+    "config-channel-list": "copyfiles -u 1 channel-list/appsscript.json dist/channel-list/",
+    "push-channel-list": "cd channel-list && clasp push",
+    "config-channel-archiver": "copyfiles -u 1 channel-archiver/appsscript.json dist/channel-archiver/",
+    "push-channel-archiver": "cd channel-archiver && clasp push",
+    "lint": "eslint */src/*.ts"
+  }
+}

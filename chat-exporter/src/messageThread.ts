@@ -1,21 +1,27 @@
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 class MessageThread {
-  constructor(ts) {
+  ts: number;
+  messages: Array<any>;
+  constructor(ts: number) {
     this.ts = ts;
     /** @type {any[]} */
     this.messages = [];
   }
-  appendMessage(message) {
+  appendMessage(message: any) {
     this.messages.push(message);
   }
   getFlattenMessages() {
-    return this.messages.map((m) => { return m.values(); });
+    return this.messages.map((m: any) => { return m.values(); });
   }
 }
 
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 class Message {
-  constructor(ts, user, text) {
+  ts: string;
+  user: string;
+  text: string;
+
+  constructor(ts: string, user: string, text: string) {
     this.ts = ts;
     this.user = user;
     this.text = text;

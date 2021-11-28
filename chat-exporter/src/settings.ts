@@ -6,6 +6,7 @@ class Settings {
   toTs: number;
   originalToDate: Date;
   channel: string;
+  appToken: string;
 
   constructor(sheet: GoogleAppsScript.Spreadsheet.Sheet) {
     const fromDate = new Date(this.findValue(sheet, 'FROM'));
@@ -14,7 +15,7 @@ class Settings {
     this.fromTs = Math.floor(this.fromDate.getTime() / 1000);
 
     const toDate = new Date(this.findValue(sheet, 'TO'));
-    this.orignalToDate = new Date(toDate);
+    this.originalToDate = new Date(toDate);
     toDate.setDate(toDate.getDate() + 1);
     toDate.setHours(0, 0, 0, 0);
     this.toDate = toDate;
@@ -25,12 +26,15 @@ class Settings {
   }
 
   getSheetName() {
-    const format = (dt) => { return dt.getFullYear() + '/' + (dt.getMonth() + 1) + '/' + dt.getDate(); };
-    return format(this.fromDate) + '-' + format(this.orignalToDate);
+    const format = (dt: Date) => { return dt.getFullYear() + '/' + (dt.getMonth() + 1) + '/' + dt.getDate(); };
+    return format(this.fromDate) + '-' + format(this.originalToDate);
   }
 
   findValue(sheet: GoogleAppsScript.Spreadsheet.Sheet, key: string): string {
     const range = sheet.createTextFinder(key).matchEntireCell(true).findNext();
+    if (range === null) {
+      return "";
+    }
     return range.offset(0, 1).getValue();
   }
 }

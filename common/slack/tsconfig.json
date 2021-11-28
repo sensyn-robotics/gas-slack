@@ -1,0 +1,16 @@
+{
+  "compilerOptions": {
+    "composite": true,
+    "lib": [
+      "esnext"
+    ],
+    "experimentalDecorators": true,
+    "skipLibCheck": true,
+    "strict": true,
+    "outFile": "../../dist/common/slack/index.js"
+  },
+  "references": [],
+  "include": [
+    "**/*.ts"
+  ]
+}

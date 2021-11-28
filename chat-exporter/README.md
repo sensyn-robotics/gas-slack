@@ -1,12 +1,9 @@
-# slack-chat-exporter
+# chat-exporter
 
 ## How to use
 
-* Install [Clasp](https://github.com/google/clasp)
 * Push GAS to your project
 ```
-> git clone https://github.com/sensyn-robotics/slack-chat-exporter
-> cd slack-chat-exporter
 > clasp login
 > clasp create hoge --rootDir ./src
 ? Create which script? sheets
@@ -25,4 +22,3 @@ Pushed 8 files.
 ```
 * Create Slack Apps
 * Set OAuth access token and others to `settings` sheet
-

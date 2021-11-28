@@ -1,12 +1,15 @@
 {
+  "extends": "./../tsconfig-gas",
   "compilerOptions": {
-    "lib": [
-      "esnext"
-    ],
-    "experimentalDecorators": true,
-    "strict": true
+    "outFile": "../dist/channel-list/index.js"
   },
   "include": [
     "src/**.ts"
+  ],
+  "references": [
+    {
+      "path": "../common/slack",
+      "prepend": true
+    }
   ]
 }
